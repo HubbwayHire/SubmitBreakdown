@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breakdown Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .report-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    h2, h4 {
+      color: #0d6efd;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .info-item {
+      margin-bottom: 8px;
+    }
+    .info-label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="report-container">
+  <h2>A Breakdown Report has been logged</h2>
+  <hr>
+
+  <!-- Fleet Information -->
+  <div>
+    <div class="section-title">Fleet Information</div>
+    <div class="info-item"><span class="info-label">Fleet Number:</span> <span id="reportFleetNumber"></span></div>
+    <div class="info-item"><span class="info-label">Make:</span> <span id="reportMake"></span></div>
+    <div class="info-item"><span class="info-label">Model:</span> <span id="reportModel"></span></div>
+    <div class="info-item"><span class="info-label">Plant Details:</span> <span id="reportPlant"></span></div>
+    <div class="info-item"><span class="info-label">Serial Number:</span> <span id="reportSerial"></span></div>
+  </div>
+
+  <!-- Breakdown Details -->
+  <div>
+    <div class="section-title">Breakdown Details</div>
+    <div class="info-item"><span class="info-label">Type of Breakdown:</span> <span id="reportType"></span></div>
+    <div class="info-item"><span class="info-label">Description:</span> <span id="reportDescription"></span></div>
+  </div>
+
+  <!-- Contact Details -->
+  <div>
+    <div class="section-title">Contact Details</div>
+    <div class="info-item"><span class="info-label">Name:</span> <span id="reportName"></span></div>
+    <div class="info-item"><span class="info-label">Number:</span> <span id="reportNumber"></span></div>
+    <div class="info-item"><span class="info-label">Email:</span> <span id="reportEmail"></span></div>
+  </div>
+
+  <!-- Photos -->
+  <div>
+    <div class="section-title">Photos</div>
+    <p>Attached images:</p>
+    <div id="reportPhotos"></div>
+  </div>
+</div>
+
+<script>
+  // Retrieve form data from session storage
+  document.getElementById("reportFleetNumber").textContent = sessionStorage.getItem("fleetNumber");
+  document.getElementById("reportMake").textContent = sessionStorage.getItem("make");
+  document.getElementById("reportModel").textContent = sessionStorage.getItem("model");
+  document.getElementById("reportPlant").textContent = sessionStorage.getItem("plant");
+  document.getElementById("reportSerial").textContent = sessionStorage.getItem("serial");
+  document.getElementById("reportType").textContent = sessionStorage.getItem("type");
+  document.getElementById("reportDescription").textContent = sessionStorage.getItem("description");
+  document.getElementById("reportName").textContent = sessionStorage.getItem("name");
+  document.getElementById("reportNumber").textContent = sessionStorage.getItem("number");
+  document.getElementById("reportEmail").textContent = sessionStorage.getItem("email");
+
+  // Photos
+  const photosContainer = document.getElementById("reportPhotos");
+  const photos = JSON.parse(sessionStorage.getItem("photos") || "[]");
+  photos.forEach(src => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.classList.add("img-fluid", "rounded", "mb-2");
+    photosContainer.appendChild(img);
+  });
+</script>
+
+</body>
+</html>
